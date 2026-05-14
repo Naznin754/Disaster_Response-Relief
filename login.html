@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReliefHub - Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .navbar {
+      background: rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .login-card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      max-width: 480px;
+      width: 100%;
+    }
+    .success-screen {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" href="#">
+        <i class="bi bi-shield-fill"></i> ReliefHub
+      </a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#howModal">How It Works</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#helpModal">Help</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh; padding-top: 80px;">
+    
+    <!-- Main Login/Register Card -->
+    <div class="login-card bg-white p-5" id="authCard">
+      <div class="text-center mb-4">
+        <h2 class="text-primary"><i class="bi bi-shield-fill"></i> ReliefHub</h2>
+        <p class="text-muted">Disaster Response & Relief Distribution System</p>
+      </div>
+
+      <ul class="nav nav-tabs mb-4" id="authTabs">
+        <li class="nav-item"><button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login">Login</button></li>
+        <li class="nav-item"><button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register">Register</button></li>
+      </ul>
+
+      <div class="tab-content">
+        <!-- Login Tab -->
+        <div class="tab-pane fade show active" id="login">
+          <form id="loginForm">
+            <div class="mb-3">
+              <label class="form-label">Username / Email</label>
+              <input type="text" class="form-control" placeholder="Enter username or email" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" placeholder="Enter password" required>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Select Role</label>
+              <select class="form-select" required>
+                <option value="">-- Choose Role --</option>
+                <option value="admin">Admin</option>
+                <option value="field">Field Officer</option>
+                <option value="donor">Donor</option>
+                <option value="ngo">NGO Representative</option>
+                <option value="victim">Victim</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 btn-lg">Login</button>
+          </form>
+        </div>
+
+        <!-- Register Tab -->
+        <div class="tab-pane fade" id="register">
+          <form id="registerForm">
+            <div class="row g-3">
+              <div class="col-md-6"><input type="text" class="form-control" placeholder="Full Name" required></div>
+              <div class="col-md-6"><input type="tel" class="form-control" placeholder="Phone Number" required></div>
+              <div class="col-12"><input type="email" class="form-control" placeholder="Email Address" required></div>
+              <div class="col-md-6"><input type="password" class="form-control" placeholder="Password" required></div>
+              <div class="col-md-6"><input type="password" class="form-control" placeholder="Confirm Password" required></div>
+              <div class="col-12">
+                <select class="form-select" required>
+                  <option value="">-- Register As --</option>
+                  <option value="victim">Victim</option>
+                  <option value="donor">Donor</option>
+                  <option value="volunteer">Volunteer</option>
+                  <option value="ngo">NGO Representative</option>
+                </select>
+              </div>
+              <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-success w-100 btn-lg">Create Account</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SUCCESS SCREEN ==================== -->
+    <div class="login-card bg-white p-5 text-center success-screen" id="successScreen">
+      <i class="bi bi-check-circle-fill" style="font-size: 5rem; color: #2ecc71;"></i>
+      <h2 class="text-success mt-3">Account Created Successfully!</h2>
+      <p class="lead text-muted">Your account has been registered.</p>
+      
+      <div class="my-4 p-3 border rounded text-start">
+        <p><strong>Name:</strong> <span id="successName">John Doe</span></p>
+        <p><strong>Role:</strong> <span id="successRole">Victim</span></p>
+        <p><strong>Account ID:</strong> <span class="text-success">VH-23047891</span></p>
+      </div>
+
+      <a href="login.html" class="btn btn-primary btn-lg px-5">Go to Login</a>
+    </div>
+
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Login Form
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert("✅ Login Successful!");
+    window.location.href = "dashboard.html";
+  });
+
+  // Register Form → Show Success Screen
+  document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Get user input for success message
+    const name = this.querySelector('input[placeholder="Full Name"]').value || "User";
+    const roleSelect = this.querySelector('select');
+    const role = roleSelect.options[roleSelect.selectedIndex].text || "User";
+
+    // Fill success screen
+    document.getElementById('successName').textContent = name;
+    document.getElementById('successRole').textContent = role;
+
+    // Hide auth card and show success screen
+    document.getElementById('authCard').style.display = 'none';
+    document.getElementById('successScreen').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>

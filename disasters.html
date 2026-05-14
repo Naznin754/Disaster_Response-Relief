@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disasters - ReliefHub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    body { background-color: #f8f9fa; }
+    .sidebar { min-height: 100vh; background: #2c3e50; color: white; }
+    .nav-link { color: #adb5bd; }
+    .nav-link:hover, .nav-link.active { color: white; background: #34495e; }
+    .card { border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar (Same as Dashboard) -->
+    <div class="col-md-2 sidebar p-3">
+      <h4 class="text-center mb-4"><i class="bi bi-shield-fill"></i> ReliefHub</h4>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2"><a href="dashboard.html" class="nav-link"><i class="bi bi-house"></i> Dashboard</a></li>
+        <li class="nav-item mb-2"><a href="disasters.html" class="nav-link active"><i class="bi bi-cloud-lightning"></i> Disasters</a></li>
+        <li class="nav-item mb-2"><a href="regions.html" class="nav-link"><i class="bi bi-geo-alt"></i> Regions</a></li>
+        <li class="nav-item mb-2"><a href="victims.html" class="nav-link"><i class="bi bi-people"></i> Victims</a></li>
+        <li class="nav-item mb-2"><a href="shelters.html" class="nav-link"><i class="bi bi-house-door"></i> Shelters</a></li>
+        <li class="nav-item mb-2"><a href="inventory.html" class="nav-link"><i class="bi bi-box"></i> Inventory</a></li>
+        <li class="nav-item mb-2"><a href="donations.html" class="nav-link"><i class="bi bi-gift"></i> Donations</a></li>
+        <li class="nav-item mb-2"><a href="distribution.html" class="nav-link"><i class="bi bi-truck"></i> Distribution</a></li>
+        <li class="nav-item mb-2"><a href="reports.html" class="nav-link"><i class="bi bi-graph-up"></i> Reports</a></li>
+        <li class="nav-item"><a href="alerts.html" class="nav-link"><i class="bi bi-bell"></i> Alerts</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-10 p-4">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Disaster Management</h2>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addDisasterModal">
+          <i class="bi bi-plus-lg"></i> Add New Disaster
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-header bg-white">
+          <input type="text" class="form-control w-25 d-inline-block" placeholder="Search disasters...">
+        </div>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead class="table-light">
+              <tr>
+                <th>ID</th>
+                <th>Disaster Name</th>
+                <th>Type</th>
+                <th>Start Date</th>
+                <th>Affected Regions</th>
+                <th>Severity</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>D001</td>
+                <td>Sylhet Flood 2026</td>
+                <td>Flood</td>
+                <td>08 May 2026</td>
+                <td>12</td>
+                <td><span class="badge bg-danger">High</span></td>
+                <td><span class="badge bg-success">Active</span></td>
+                <td>
+                  <button class="btn btn-sm btn-info">View</button>
+                  <button class="btn btn-sm btn-warning">Edit</button>
+                  <button class="btn btn-sm btn-danger">Close</button>
+                </td>
+              </tr>
+              <!-- Add more rows as needed -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
