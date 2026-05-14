@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disasters - ReliefHub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background-color: #f0f2f5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .sidebar { min-height: 100vh; background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%); color: white; padding: 1.5rem 0; box-shadow: 2px 0 10px rgba(0,0,0,0.1); position: fixed; width: 250px; left: 0; top: 0; z-index: 1000; }
+    .sidebar-header { padding: 1.5rem; border-bottom: 2px solid rgba(255,255,255,0.1); text-align: center; margin-bottom: 1.5rem; }
+    .sidebar-header h4 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .sidebar-header i { font-size: 2rem; color: #e74c3c; margin-right: 0.5rem; }
+    .sidebar-header small { color: #bdc3c7; font-size: 0.85rem; }
+    .nav-link { color: #bdc3c7; padding: 0.75rem 1.5rem; border-radius: 0; margin: 0.3rem 0; transition: all 0.3s; font-weight: 500; }
+    .nav-link:hover { color: white; background: rgba(231, 76, 60, 0.2); padding-left: 2rem; }
+    .nav-link.active { color: white; background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%); border-left: 4px solid #e74c3c; padding-left: 1.5rem; }
+    .nav-link i { margin-right: 0.8rem; width: 20px; }
+    .main-content { margin-left: 250px; padding: 2rem; }
+    .top-bar { background: white; padding: 1.5rem 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .top-bar h2 { color: #2c3e50; font-weight: 700; margin: 0; }
+    .btn-group { display: flex; gap: 1rem; }
+    .btn-primary { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); border: none; border-radius: 10px; padding: 0.7rem 1.5rem; font-weight: 600; transition: all 0.3s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3); color: white; }
+    .btn-outline-primary { border: 2px solid #3498db; color: #3498db; border-radius: 10px; padding: 0.6rem 1.5rem; font-weight: 600; transition: all 0.3s; }
+    .btn-outline-primary:hover { background: #3498db; color: white; }
+    .card { border: none; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); overflow: hidden; }
+    .card-header { background: white; border-bottom: 2px solid #ecf0f1; padding: 1.5rem; }
+    .card-header h5 { color: #2c3e50; font-weight: 700; margin: 0; }
+    .card-body { padding: 1.5rem; }
+    .table { margin: 0; }
+    .table-hover tbody tr:hover { background-color: #f8f9fa !important; }
+    .table th { border-top: none; color: #2c3e50; font-weight: 600; background: #f8f9fa; }
+    .badge { padding: 0.4rem 0.8rem; border-radius: 20px; font-weight: 500; }
+    .badge-critical { background: #e74c3c; color: white; }
+    .badge-high { background: #f39c12; color: white; }
+    .badge-resolved { background: #27ae60; color: white; }
+    @media (max-width: 768px) { .sidebar { width: 200px; } .main-content { margin-left: 200px; } }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h4><i class="bi bi-shield-fill"></i> ReliefHub</h4>
+        <small>Admin Dashboard</small>
+      </div>
+
+      <ul class="nav flex-column px-2">
+        <li class="nav-item mb-1"><a href="dashboard.html" class="nav-link"><i class="bi bi-house-fill"></i> Dashboard</a></li>
+        <li class="nav-item mb-1"><a href="disasters.html" class="nav-link active"><i class="bi bi-cloud-lightning-fill"></i> Disasters</a></li>
+        <li class="nav-item mb-1"><a href="regions.html" class="nav-link"><i class="bi bi-map-fill"></i> Regions</a></li>
+        <li class="nav-item mb-1"><a href="victims.html" class="nav-link"><i class="bi bi-people-fill"></i> Victims</a></li>
+        <li class="nav-item mb-1"><a href="shelter.html" class="nav-link"><i class="bi bi-house-door-fill"></i> Shelters</a></li>
+        <li class="nav-item mb-1"><a href="inventory.html" class="nav-link"><i class="bi bi-box-seam-fill"></i> Inventory</a></li>
+        <li class="nav-item mb-1"><a href="donations.html" class="nav-link"><i class="bi bi-gift-fill"></i> Donations</a></li>
+        <li class="nav-item mb-1"><a href="distribution.html" class="nav-link"><i class="bi bi-truck-fill"></i> Distribution</a></li>
+        <li class="nav-item mb-1"><a href="reports.html" class="nav-link"><i class="bi bi-graph-up-arrow"></i> Reports</a></li>
+        <li class="nav-item mb-1"><a href="alerts.html" class="nav-link"><i class="bi bi-bell-fill"></i> Alerts</a></li>
+        <li class="nav-item mt-4 pt-3" style="border-top: 2px solid rgba(255,255,255,0.1);"><a href="login.html" class="nav-link"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="top-bar">
+        <h2><i class="bi bi-exclamation-triangle-fill"></i> Disaster Management</h2>
+        <div class="btn-group">
+          <button class="btn btn-outline-primary"><i class="bi bi-search"></i> Search</button>
+          <button class="btn btn-primary"><i class="bi bi-plus-lg"></i> Add New Disaster</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5>Active & Recent Disasters</h5>
+            <input type="text" class="form-control w-25" placeholder="Search disasters..." style="max-width: 250px;">
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-hover">
+            <thead class="table-light">
+              <tr>
+                <th>ID</th>
+                <th>Disaster Name</th>
+                <th>Type</th>
+                <th>Start Date</th>
+                <th>Affected Regions</th>
+                <th>Severity</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>D-001</strong></td>
+                <td><strong>Sylhet Flood</strong></td>
+                <td>Flood</td>
+                <td>May 8, 2026</td>
+                <td>Sylhet, Sunamganj</td>
+                <td><span class="badge badge-critical">Critical</span></td>
+                <td><span class="badge bg-warning">Active</span></td>
+                <td><a href="#" class="btn btn-sm btn-outline-primary">View</a></td>
+              </tr>
+              <tr>
+                <td><strong>D-002</strong></td>
+                <td><strong>Coastal Cyclone</strong></td>
+                <td>Cyclone</td>
+                <td>May 5, 2026</td>
+                <td>Chittagong, Cox Bazar</td>
+                <td><span class="badge badge-high">High</span></td>
+                <td><span class="badge bg-warning">Active</span></td>
+                <td><a href="#" class="btn btn-sm btn-outline-primary">View</a></td>
+              </tr>
+              <tr>
+                <td><strong>D-003</strong></td>
+                <td><strong>Dhaka Earthquake</strong></td>
+                <td>Earthquake</td>
+                <td>April 20, 2026</td>
+                <td>Dhaka Division</td>
+                <td><span class="badge badge-resolved">Resolved</span></td>
+                <td><span class="badge bg-success">Completed</span></td>
+                <td><a href="#" class="btn btn-sm btn-outline-primary">View</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

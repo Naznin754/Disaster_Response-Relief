@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReliefHub - Disaster Response & Relief Distribution System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      background: rgba(255, 255, 255, 0.98) !important;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2c3e50 !important;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .navbar-brand i {
+      color: #e74c3c;
+      font-size: 2rem;
+    }
+
+    .navbar-nav .nav-link {
+      color: #555 !important;
+      font-weight: 500;
+      margin: 0 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #e74c3c !important;
+    }
+
+    .nav-button {
+      margin-left: 1rem;
+    }
+
+    /* ========== HERO SECTION ========== */
+    .hero {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e8ba3 100%);
+      color: white;
+      padding: 5rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -5%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: slideUp 0.8s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-hero {
+      padding: 0.85rem 2.5rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      border: none;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-hero-primary {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .btn-hero-primary:hover {
+      background: #c0392b;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
+      color: white;
+    }
+
+    .btn-hero-secondary {
+      background: white;
+      color: #2c3e50;
+      border: 2px solid white;
+    }
+
+    .btn-hero-secondary:hover {
+      background: transparent;
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+    }
+
+    /* ========== FEATURES SECTION ========== */
+    .features {
+      padding: 5rem 0;
+      background: #f8f9fa;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeIn 0.8s ease 0.2s both;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+
+    .section-title p {
+      font-size: 1.1rem;
+      color: #7f8c8d;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .feature-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      text-align: center;
+      animation: fadeIn 0.8s ease both;
+      border-top: 5px solid #e74c3c;
+    }
+
+    .feature-card:nth-child(2) {
+      border-top-color: #27ae60;
+      animation-delay: 0.1s;
+    }
+
+    .feature-card:nth-child(3) {
+      border-top-color: #3498db;
+      animation-delay: 0.2s;
+    }
+
+    .feature-card:nth-child(4) {
+      border-top-color: #9b59b6;
+      animation-delay: 0.3s;
+    }
+
+    .feature-card:nth-child(5) {
+      border-top-color: #f39c12;
+      animation-delay: 0.4s;
+    }
+
+    .feature-card:nth-child(6) {
+      border-top-color: #1abc9c;
+      animation-delay: 0.5s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+
+    .feature-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-card:nth-child(1) .feature-icon { color: #e74c3c; }
+    .feature-card:nth-child(2) .feature-icon { color: #27ae60; }
+    .feature-card:nth-child(3) .feature-icon { color: #3498db; }
+    .feature-card:nth-child(4) .feature-icon { color: #9b59b6; }
+    .feature-card:nth-child(5) .feature-icon { color: #f39c12; }
+    .feature-card:nth-child(6) .feature-icon { color: #1abc9c; }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+      color: #7f8c8d;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    /* ========== HOW IT WORKS ========== */
+    .how-it-works {
+      padding: 5rem 0;
+      background: white;
+    }
+
+    .steps-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .step {
+      position: relative;
+      padding: 2rem;
+      background: #f8f9fa;
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .step:hover {
+      background: #e74c3c;
+      color: white;
+      transform: translateY(-5px);
+    }
+
+    .step-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #e74c3c;
+      margin-bottom: 1rem;
+      background: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .step:hover .step-number {
+      background: white;
+      color: #e74c3c;
+    }
+
+    .step h4 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      color: #2c3e50;
+    }
+
+    .step:hover h4 {
+      color: white;
+    }
+
+    .step p {
+      color: #7f8c8d;
+      font-size: 0.95rem;
+    }
+
+    .step:hover p {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* ========== ROLES SECTION ========== */
+    .roles {
+      padding: 5rem 0;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .role-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      border-left: 6px solid;
+      margin-bottom: 1.5rem;
+    }
+
+    .role-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    .role-card.admin { border-left-color: #e74c3c; }
+    .role-card.donor { border-left-color: #27ae60; }
+    .role-card.ngo { border-left-color: #9b59b6; }
+    .role-card.victim { border-left-color: #f39c12; }
+    .role-card.volunteer { border-left-color: #3498db; }
+
+    .role-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .role-icon {
+      font-size: 2.5rem;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+    }
+
+    .role-card.admin .role-icon { background: rgba(231, 76, 60, 0.1); color: #e74c3c; }
+    .role-card.donor .role-icon { background: rgba(39, 174, 96, 0.1); color: #27ae60; }
+    .role-card.ngo .role-icon { background: rgba(155, 89, 182, 0.1); color: #9b59b6; }
+    .role-card.victim .role-icon { background: rgba(243, 156, 18, 0.1); color: #f39c12; }
+    .role-card.volunteer .role-icon { background: rgba(52, 152, 219, 0.1); color: #3498db; }
+
+    .role-card h4 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #2c3e50;
+      margin: 0;
+    }
+
+    .role-card p {
+      color: #7f8c8d;
+      margin: 1rem 0 0 0;
+    }
+
+    .role-benefits {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid #ecf0f1;
+    }
+
+    .role-benefits li {
+      color: #555;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .role-benefits li:before {
+      content: "✓ ";
+      color: #27ae60;
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+
+    /* ========== CTA SECTION ========== */
+    .cta {
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .cta p {
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: #2c3e50;
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+
+    .footer-section h4 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #e74c3c;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: #bdc3c7;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.3s;
+      line-height: 1.8;
+    }
+
+    .footer-section a:hover {
+      color: #e74c3c;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+      text-align: center;
+      color: #95a5a6;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .btn-hero {
+        width: 100%;
+      }
+
+      .section-title h2 {
+        font-size: 2rem;
+      }
+
+      .feature-card {
+        padding: 1.5rem;
+      }
+
+      .cta h2 {
+        font-size: 1.8rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .cta-buttons .btn-hero {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-lg">
+      <a class="navbar-brand" href="index.html">
+        <i class="bi bi-shield-fill"></i> ReliefHub
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#how-it-works">How It Works</a></li>
+          <li class="nav-item"><a class="nav-link" href="#roles">Roles</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item nav-button">
+            <a href="login.html" class="btn btn-outline-primary btn-sm"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+          </li>
+          <li class="nav-item">
+            <a href="login.html" class="btn btn-primary btn-sm"><i class="bi bi-person-plus"></i> Register</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero">
+    <div class="container-lg">
+      <div class="hero-content">
+        <h1><i class="bi bi-shield-fill"></i> ReliefHub</h1>
+        <p>A modern disaster response and relief distribution system connecting donors, NGOs, volunteers, and affected communities.</p>
+        <div class="hero-buttons">
+          <a href="login.html" class="btn-hero btn-hero-primary">
+            <i class="bi bi-box-arrow-in-right"></i> Login to Dashboard
+          </a>
+          <a href="login.html" class="btn-hero btn-hero-secondary">
+            <i class="bi bi-person-plus"></i> Create New Account
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURES SECTION ========== -->
+  <section class="features" id="features">
+    <div class="container-lg">
+      <div class="section-title">
+        <h2>Powerful Features</h2>
+        <p>Everything you need to efficiently manage disaster relief operations</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-lightning"></i></div>
+            <h3>Real-Time Tracking</h3>
+            <p>Monitor disasters, relief distribution, and resource allocation in real-time with live dashboards.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-people"></i></div>
+            <h3>Community Support</h3>
+            <p>Connect donors, NGOs, volunteers, and victims on a single unified platform for coordinated action.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-boxes"></i></div>
+            <h3>Inventory Management</h3>
+            <p>Track supplies, manage inventory levels, and optimize distribution across multiple shelters.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-graph-up"></i></div>
+            <h3>Impact Analytics</h3>
+            <p>Generate detailed reports and analytics to measure the impact of relief efforts and donor contributions.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-bell"></i></div>
+            <h3>Instant Alerts</h3>
+            <p>Receive real-time notifications for urgent situations, task assignments, and distribution updates.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-shield-check"></i></div>
+            <h3>Secure & Reliable</h3>
+            <p>Enterprise-grade security with role-based access control and audit trails for complete transparency.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HOW IT WORKS ========== -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container-lg">
+      <div class="section-title">
+        <h2>How It Works</h2>
+        <p>Simple process to coordinate disaster relief efforts</p>
+      </div>
+
+      <div class="steps-container">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h4>Register Account</h4>
+          <p>Create an account with your role (Admin, Donor, NGO, Volunteer, or Victim) to get started.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <h4>Access Dashboard</h4>
+          <p>Log in to your personalized dashboard with tools relevant to your role and responsibilities.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <h4>Participate & Contribute</h4>
+          <p>Take action - donate, volunteer, coordinate relief, or request assistance based on your role.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <h4>Track & Report</h4>
+          <p>Monitor progress, generate reports, and measure the real impact of collaborative relief efforts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ROLES SECTION ========== -->
+  <section class="roles" id="roles">
+    <div class="container-lg">
+      <div class="section-title">
+        <h2>User Roles</h2>
+        <p>Tailored experiences for every participant in the relief system</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="role-card admin">
+            <div class="role-header">
+              <div class="role-icon"><i class="bi bi-person-badge"></i></div>
+              <h4>Admin</h4>
+            </div>
+            <p>Central command center for managing all disaster relief operations.</p>
+            <ul class="role-benefits">
+              <li>Manage all disasters and emergencies</li>
+              <li>Monitor inventory and resources</li>
+              <li>Oversee distribution network</li>
+              <li>Access analytics & reports</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="role-card donor">
+            <div class="role-header">
+              <div class="role-icon"><i class="bi bi-heart"></i></div>
+              <h4>Donor</h4>
+            </div>
+            <p>Contribute to relief efforts and track your charitable impact.</p>
+            <ul class="role-benefits">
+              <li>Make monetary donations</li>
+              <li>Track donation history</li>
+              <li>View impact reports</li>
+              <li>Get tax deduction info</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="role-card ngo">
+            <div class="role-header">
+              <div class="role-icon"><i class="bi bi-building"></i></div>
+              <h4>NGO</h4>
+            </div>
+            <p>Manage organizational relief efforts and volunteer coordination.</p>
+            <ul class="role-benefits">
+              <li>Manage donations</li>
+              <li>Coordinate volunteers</li>
+              <li>Track projects & impact</li>
+              <li>Generate impact reports</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="role-card victim">
+            <div class="role-header">
+              <div class="role-icon"><i class="bi bi-person-exclamation"></i></div>
+              <h4>Victim</h4>
+            </div>
+            <p>Access relief assistance and track support received.</p>
+            <ul class="role-benefits">
+              <li>Register for assistance</li>
+              <li>Check relief status</li>
+              <li>View assigned shelter</li>
+              <li>Get distribution updates</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="role-card volunteer">
+            <div class="role-header">
+              <div class="role-icon"><i class="bi bi-people"></i></div>
+              <h4>Volunteer</h4>
+            </div>
+            <p>Participate in relief activities and assist affected communities.</p>
+            <ul class="role-benefits">
+              <li>View task assignments</li>
+              <li>Track victim assistance</li>
+              <li>Monitor inventory</li>
+              <li>Report completion</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT SECTION ========== -->
+  <section class="how-it-works" id="about">
+    <div class="container-lg">
+      <div class="section-title">
+        <h2>About ReliefHub</h2>
+        <p>Our Mission & Vision</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <div style="background: #f8f9fa; padding: 2.5rem; border-radius: 15px; margin-bottom: 2rem;">
+            <h4 style="color: #e74c3c; font-weight: 700; margin-bottom: 1rem;"><i class="bi bi-target"></i> Our Mission</h4>
+            <p style="color: #555; line-height: 1.8;">
+              ReliefHub is dedicated to streamlining disaster response and relief distribution through technology and community collaboration. We connect donors, NGOs, volunteers, and affected communities on a single unified platform to ensure efficient, transparent, and impactful relief operations.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div style="background: #f8f9fa; padding: 2.5rem; border-radius: 15px; margin-bottom: 2rem;">
+            <h4 style="color: #27ae60; font-weight: 700; margin-bottom: 1rem;"><i class="bi bi-eye"></i> Our Vision</h4>
+            <p style="color: #555; line-height: 1.8;">
+              To create a world where disaster relief is coordinated, efficient, and reaches those in need faster. By leveraging technology and community engagement, we aim to minimize suffering, optimize resource utilization, and accelerate recovery in times of crisis.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4" style="margin-top: 2rem;">
+        <div class="col-md-4">
+          <div style="text-align: center; padding: 1.5rem;">
+            <h3 style="font-size: 2.5rem; color: #e74c3c; font-weight: 700;">100%</h3>
+            <p style="color: #7f8c8d;">Transparent Operations</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div style="text-align: center; padding: 1.5rem;">
+            <h3 style="font-size: 2.5rem; color: #27ae60; font-weight: 700;">24/7</h3>
+            <p style="color: #7f8c8d;">System Availability</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div style="text-align: center; padding: 1.5rem;">
+            <h3 style="font-size: 2.5rem; color: #3498db; font-weight: 700;">Real-Time</h3>
+            <p style="color: #7f8c8d;">Impact Tracking</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA SECTION ========== -->
+  <section class="cta">
+    <div class="container-lg">
+      <h2>Ready to Make a Difference?</h2>
+      <p>Join ReliefHub today and be part of a global community working together to save lives.</p>
+      <div class="cta-buttons">
+        <a href="login.html" class="btn-hero btn-hero-primary">
+          <i class="bi bi-box-arrow-in-right"></i> Login Now
+        </a>
+        <a href="login.html" class="btn-hero btn-hero-secondary">
+          <i class="bi bi-person-plus"></i> Create Account
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="container-lg">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ReliefHub</h4>
+          <p>A comprehensive disaster response and relief distribution system connecting communities, donors, NGOs, and volunteers.</p>
+        </div>
+
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <a href="#features">Features</a><br>
+          <a href="#how-it-works">How It Works</a><br>
+          <a href="#roles">User Roles</a><br>
+          <a href="login.html">Login</a>
+        </div>
+
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Email: info@reliefhub.org<br>
+          Phone: +1 (XXX) XXX-XXXX<br>
+          Address: Emergency Response Center</p>
+        </div>
+
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <a href="#"><i class="bi bi-facebook"></i> Facebook</a><br>
+          <a href="#"><i class="bi bi-twitter"></i> Twitter</a><br>
+          <a href="#"><i class="bi bi-instagram"></i> Instagram</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 ReliefHub. All rights reserved. | <a href="#" style="color: #bdc3c7;">Privacy Policy</a> | <a href="#" style="color: #bdc3c7;">Terms of Service</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add scroll animation to elements
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.feature-card, .step, .role-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'all 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>

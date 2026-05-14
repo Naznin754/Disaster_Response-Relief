@@ -7,22 +7,192 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
     body {
-      background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e8ba3 100%);
       min-height: 100vh;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
     }
+
+    /* Top Navigation */
     .navbar {
-      background: rgba(255, 255, 255, 0.95) !important;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.98) !important;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      padding: 0.8rem 0;
     }
+
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2c3e50 !important;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .navbar-brand i {
+      color: #e74c3c;
+      font-size: 1.8rem;
+    }
+
+    .nav-link {
+      color: #555 !important;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem !important;
+    }
+
+    .nav-link:hover {
+      color: #e74c3c !important;
+    }
+
+    /* Main Container */
+    .login-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    /* Login Card */
     .login-card {
       border: none;
-      border-radius: 15px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-      max-width: 480px;
+      border-radius: 20px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+      max-width: 500px;
       width: 100%;
+      background: white;
+      overflow: hidden;
     }
+
+    .login-header {
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .login-header i {
+      font-size: 2.5rem;
+      color: #e74c3c;
+      margin-bottom: 0.5rem;
+    }
+
+    .login-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .login-header p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    /* Tabs */
+    .nav-tabs {
+      border-bottom: 2px solid #ecf0f1;
+    }
+
+    .nav-tabs .nav-link {
+      color: #7f8c8d !important;
+      border: none;
+      padding: 1rem !important;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .nav-tabs .nav-link:hover {
+      color: #2c3e50 !important;
+      border-bottom: 3px solid #3498db;
+    }
+
+    .nav-tabs .nav-link.active {
+      color: white !important;
+      background: #e74c3c;
+      border: none;
+      border-bottom: 3px solid #c0392b;
+    }
+
+    .tab-content {
+      padding: 2rem;
+    }
+
+    /* Form Elements */
+    .form-label {
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-control, .form-select {
+      border: 2px solid #ecf0f1;
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.15);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(231, 76, 60, 0.3);
+      background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    }
+
+    .btn-outline-secondary {
+      border: 2px solid #95a5a6;
+      color: #2c3e50;
+      font-weight: 600;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+
+    .btn-outline-secondary:hover {
+      background: #95a5a6;
+      color: white;
+      border-color: #95a5a6;
+    }
+
+    .login-footer {
+      text-align: center;
+      color: #7f8c8d;
+      font-size: 0.9rem;
+    }
+
+    .login-footer a {
+      color: #e74c3c;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Success Screen */
     .success-screen {
       display: none;
     }
@@ -31,12 +201,15 @@
 <body>
 
   <!-- Top Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold text-primary" href="#">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-lg">
+      <a class="navbar-brand" href="login.html">
         <i class="bi bi-shield-fill"></i> ReliefHub
       </a>
-      <div class="collapse navbar-collapse">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">About Us</a></li>
           <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#howModal">How It Works</a></li>
@@ -47,18 +220,19 @@
     </div>
   </nav>
 
-  <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh; padding-top: 80px;">
+  <div class="login-container">
     
     <!-- Main Login/Register Card -->
-    <div class="login-card bg-white p-5" id="authCard">
-      <div class="text-center mb-4">
-        <h2 class="text-primary"><i class="bi bi-shield-fill"></i> ReliefHub</h2>
-        <p class="text-muted">Disaster Response & Relief Distribution System</p>
+    <div class="login-card" id="authCard">
+      <div class="login-header">
+        <i class="bi bi-shield-fill"></i>
+        <h2>ReliefHub</h2>
+        <p>Disaster Response & Relief Distribution System</p>
       </div>
 
-      <ul class="nav nav-tabs mb-4" id="authTabs">
-        <li class="nav-item"><button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login">Login</button></li>
-        <li class="nav-item"><button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register">Register</button></li>
+      <ul class="nav nav-tabs" id="authTabs">
+        <li class="nav-item flex-fill"><button class="nav-link active w-100" id="login-tab" data-bs-toggle="tab" data-bs-target="#login">Login</button></li>
+        <li class="nav-item flex-fill"><button class="nav-link w-100" id="register-tab" data-bs-toggle="tab" data-bs-target="#register">Register</button></li>
       </ul>
 
       <div class="tab-content">

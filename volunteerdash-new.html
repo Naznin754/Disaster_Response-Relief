@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volunteerdash - ReliefHub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background-color: #f0f2f5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .sidebar { min-height: 100vh; background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%); color: white; padding: 1.5rem 0; box-shadow: 2px 0 10px rgba(0,0,0,0.1); position: fixed; width: 250px; left: 0; top: 0; z-index: 1000; }
+    .sidebar-header { padding: 1.5rem; border-bottom: 2px solid rgba(255,255,255,0.1); text-align: center; margin-bottom: 1.5rem; }
+    .sidebar-header h4 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .sidebar-header i { font-size: 2rem; color: #3498db; margin-right: 0.5rem; }
+    .sidebar-header small { color: #bdc3c7; font-size: 0.85rem; }
+    .nav-link { color: #bdc3c7; padding: 0.75rem 1.5rem; border-radius: 0; margin: 0.3rem 0; transition: all 0.3s; font-weight: 500; }
+    .nav-link:hover { color: white; background: rgba(52, 152, 219, 0.2); padding-left: 2rem; }
+    .nav-link.active { color: white; background: linear-gradient(90deg, #3498db 0%, #2980b9 100%); border-left: 4px solid #3498db; padding-left: 1.5rem; }
+    .nav-link i { margin-right: 0.8rem; width: 20px; }
+    .main-content { margin-left: 250px; padding: 2rem; }
+    .top-bar { background: white; padding: 1.5rem 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 2rem; }
+    .top-bar h2 { color: #2c3e50; font-weight: 700; margin: 0; }
+    .stat-card { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: all 0.3s; border-left: 5px solid #3498db; text-align: center; }
+    .stat-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .stat-card h5 { color: #7f8c8d; font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .stat-card h2 { color: #2c3e50; font-weight: 700; margin: 0; }
+    .card { border: none; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); overflow: hidden; }
+    .card-header { background: white; border-bottom: 2px solid #ecf0f1; padding: 1.5rem; }
+    .card-header h5 { color: #2c3e50; font-weight: 700; margin: 0; }
+    .card-body { padding: 1.5rem; }
+    .list-group-item { border: 1px solid #ecf0f1; }
+    .list-group-item:hover { background-color: #f8f9fa; }
+    .btn-primary { background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); border: none; border-radius: 10px; padding: 0.7rem 1.5rem; font-weight: 600; transition: all 0.3s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3); color: white; }
+    @media (max-width: 768px) { .sidebar { width: 200px; } .main-content { margin-left: 200px; } }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h4><i class="bi bi-shield-fill"></i> ReliefHub</h4>
+        <small>Volunteer Portal</small>
+      </div>
+
+      <ul class="nav flex-column px-2">
+        <li class="nav-item mb-1"><a href="volunteerdash.html" class="nav-link active"><i class="bi bi-house-fill"></i> Dashboard</a></li>
+        <li class="nav-item mb-1"><a href="distribution.html" class="nav-link"><i class="bi bi-clipboard-check"></i> My Tasks</a></li>
+        <li class="nav-item mb-1"><a href="victims.html" class="nav-link"><i class="bi bi-people-fill"></i> Assigned Victims</a></li>
+        <li class="nav-item mb-1"><a href="inventory.html" class="nav-link"><i class="bi bi-box-seam-fill"></i> Inventory Check</a></li>
+        <li class="nav-item mb-1"><a href="alerts.html" class="nav-link"><i class="bi bi-bell-fill"></i> Alerts</a></li>
+        <li class="nav-item mt-4 pt-3" style="border-top: 2px solid rgba(255,255,255,0.1);"><a href="login.html" class="nav-link"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <div class="top-bar">
+        <h2><i class="bi bi-person-badge"></i> Welcome, Md. Arif Khan</h2>
+      </div>
+
+      <div class="row g-4 mb-5">
+        <div class="col-md-6 col-lg-3">
+          <div class="stat-card">
+            <h5><i class="bi bi-clipboard-check"></i> Pending Tasks</h5>
+            <h2>7</h2>
+            <small>To be completed today</small>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="stat-card">
+            <h5><i class="bi bi-people"></i> Victims Assisted</h5>
+            <h2>24</h2>
+            <small>This month</small>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="stat-card">
+            <h5><i class="bi bi-check-circle"></i> Tasks Completed</h5>
+            <h2>128</h2>
+            <small>Total completed</small>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="stat-card">
+            <h5><i class="bi bi-star-fill"></i> Performance</h5>
+            <h2>98%</h2>
+            <small>Task completion rate</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header">
+              <h5><i class="bi bi-list-check"></i> Today's Tasks</h5>
+            </div>
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Distribute relief to 12 families</strong> in Sylhet Sadar <br><small class="text-muted">By 5:00 PM</small></li>
+                <li class="list-group-item"><strong>Update inventory</strong> at Central Warehouse <br><small class="text-muted">By 3:00 PM</small></li>
+                <li class="list-group-item"><strong>Medical checkup</strong> at Shelter 3 <br><small class="text-muted">By 2:00 PM</small></li>
+                <li class="list-group-item"><strong>Register new beneficiaries</strong> - 8 persons <br><small class="text-muted">By 4:00 PM</small></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header">
+              <h5><i class="bi bi-box"></i> Inventory Status</h5>
+            </div>
+            <div class="card-body">
+              <p><strong>Rice (kg):</strong> <span class="text-success">8,500 / 10,000</span></p>
+              <div class="progress mb-3" style="height: 8px;">
+                <div class="progress-bar bg-success" style="width: 85%;"></div>
+              </div>
+
+              <p><strong>Water Bottles:</strong> <span class="text-warning">3,200 / 5,000</span></p>
+              <div class="progress mb-3" style="height: 8px;">
+                <div class="progress-bar bg-warning" style="width: 64%;"></div>
+              </div>
+
+              <p><strong>Medical Kits:</strong> <span class="text-info">450 / 500</span></p>
+              <div class="progress" style="height: 8px;">
+                <div class="progress-bar bg-info" style="width: 90%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
